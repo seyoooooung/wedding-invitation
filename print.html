@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>이정훈 · 김세영 청첩장 (2단 접이 인쇄용)</title>
+<style>
+  @page { size: 260mm 190mm; margin: 0; }
+
+  :root {
+    --cobalt: #0B3FBE;
+    --cobalt-deep: #082E92;
+    --ink: #1C2440;
+    --muted: #707A99;
+    --hairline: #E2E7F3;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    font-family: "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, "Noto Sans KR", sans-serif;
+    color: var(--ink);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .sheet {
+    width: 260mm;
+    height: 190mm;
+    display: flex;
+    page-break-after: always;
+    overflow: hidden;
+  }
+  .panel {
+    width: 130mm;
+    height: 190mm;
+    position: relative;
+  }
+
+  /* ---------- 겉면 (뒤표지 | 앞표지) ---------- */
+  .outer { background: #fff; }
+
+  .front { padding: 13mm 12mm 12mm; }
+  .front-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .front-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 7.5pt;
+    letter-spacing: 0.32em;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .hero { margin-top: 24mm; }
+  .hero-num {
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-size: 86pt;
+    line-height: 0.92;
+    color: var(--cobalt);
+    letter-spacing: -0.01em;
+  }
+  .hero-rule {
+    width: 24mm;
+    height: 0.5mm;
+    background: var(--cobalt);
+    margin: 7mm 0 6mm 1.5mm;
+  }
+  .names-line {
+    margin-top: 14mm;
+    font-size: 14pt;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: 0.08em;
+  }
+  .names-line .amp {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--cobalt);
+    margin: 0 1.6mm;
+  }
+  .front-bottom {
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .front-bottom .when {
+    font-size: 9pt;
+    color: #3A425F;
+    line-height: 1.95;
+  }
+  .front-bottom .where {
+    text-align: right;
+    font-size: 7pt;
+    letter-spacing: 0.26em;
+    color: var(--muted);
+    line-height: 2.1;
+  }
+
+  .back {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7mm;
+    text-align: center;
+  }
+  .back-amp {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 36pt;
+    color: var(--cobalt);
+    line-height: 1;
+  }
+  .back-names {
+    font-size: 9.5pt;
+    letter-spacing: 0.2em;
+    text-indent: 0.2em;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .back-date {
+    font-size: 7.5pt;
+    letter-spacing: 0.3em;
+    text-indent: 0.3em;
+    color: var(--muted);
+  }
+
+  /* ---------- 속면 (인사말 | 예식 안내) ---------- */
+  .inner {
+    background: #fff;
+    padding: 16mm 14mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .inner + .inner { border-left: 0.2mm solid var(--hairline); }
+
+  .eyebrow {
+    font-size: 8pt;
+    letter-spacing: 0.3em;
+    text-indent: 0.3em;
+    color: var(--cobalt);
+    font-weight: 600;
+    margin-bottom: 10mm;
+  }
+
+  .greeting {
+    font-size: 10.5pt;
+    line-height: 2.3;
+    color: #3A425F;
+  }
+  .family {
+    margin-top: 14mm;
+    display: flex;
+    flex-direction: column;
+    gap: 3.2mm;
+    font-size: 10pt;
+  }
+  .family-row { display: flex; align-items: baseline; justify-content: center; gap: 2.6mm; }
+  .family-row .parents { color: var(--muted); }
+  .family-row .relation { font-size: 8.5pt; color: var(--muted); }
+  .family-row .child { font-weight: 700; letter-spacing: 0.04em; }
+
+  .date-line { font-size: 14pt; font-weight: 700; letter-spacing: 0.02em; }
+  .time-line { margin-top: 1.5mm; font-size: 10.5pt; color: #3A425F; }
+
+  .calendar {
+    margin-top: 8mm;
+    width: 72mm;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    row-gap: 1mm;
+  }
+  .calendar .dow {
+    font-size: 7pt;
+    color: var(--muted);
+    padding-bottom: 2mm;
+    border-bottom: 0.2mm solid var(--hairline);
+    margin-bottom: 1.5mm;
+  }
+  .calendar .day {
+    height: 6.4mm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8.5pt;
+    color: #3A425F;
+  }
+  .calendar .day.sun { color: #B0B7CC; }
+  .calendar .day.dday {
+    position: relative;
+    color: #fff;
+    font-weight: 700;
+    z-index: 0;
+  }
+  .calendar .day.dday::before {
+    content: "";
+    position: absolute;
+    width: 5.6mm; height: 5.6mm;
+    border-radius: 50%;
+    background: var(--cobalt);
+    z-index: -1;
+  }
+
+  .venue {
+    margin-top: 9mm;
+    padding-top: 7mm;
+    border-top: 0.2mm solid var(--hairline);
+    width: 84mm;
+  }
+  .venue-name { font-size: 11.5pt; font-weight: 700; }
+  .venue-addr { margin-top: 1.6mm; font-size: 9pt; color: var(--muted); }
+  .venue-tel { margin-top: 0.6mm; font-size: 9pt; color: var(--muted); }
+
+  .transport {
+    margin-top: 7mm;
+    display: flex;
+    flex-direction: column;
+    gap: 3.6mm;
+    font-size: 8.5pt;
+    color: #3A425F;
+    line-height: 1.75;
+  }
+  .transport dt { font-weight: 700; color: var(--ink); font-size: 8.5pt; margin-bottom: 0.4mm; }
+</style>
+</head>
+<body>
+
+  <!-- 1페이지: 겉면 (왼쪽 = 뒤표지, 오른쪽 = 앞표지) -->
+  <div class="sheet">
+    <div class="panel outer back">
+      <p class="back-amp">&amp;</p>
+      <p class="back-names">이정훈 · 김세영</p>
+      <p class="back-date">2026. 11. 07</p>
+    </div>
+    <div class="panel outer front">
+      <div class="front-inner">
+        <div class="front-top">
+          <span>THE MARRIAGE OF</span>
+          <span>2026</span>
+        </div>
+        <div class="hero">
+          <p class="hero-num">11</p>
+          <div class="hero-rule"></div>
+          <p class="hero-num">07</p>
+        </div>
+        <p class="names-line">이정훈 <span class="amp">&amp;</span> 김세영</p>
+        <div class="front-bottom">
+          <p class="when">토요일 오후 3시 30분<br>W스퀘어컨벤션 8층 채플홀</p>
+          <p class="where">SAT<br>PM 3:30</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2페이지: 속면 (왼쪽 = 인사말, 오른쪽 = 예식 안내) -->
+  <div class="sheet">
+    <div class="panel inner">
+      <p class="eyebrow">INVITATION</p>
+      <p class="greeting">
+        서로 다른 두 사람이 만나<br>
+        같은 방향을 바라보게 되었습니다.<br><br>
+        함께 걷는 첫걸음을<br>
+        가까이에서 축복해 주시면<br>
+        더없는 기쁨으로 간직하겠습니다.
+      </p>
+      <div class="family">
+        <div class="family-row">
+          <span class="parents">이종현 · 윤미란</span>
+          <span class="relation">의 아들</span>
+          <span class="child">정훈</span>
+        </div>
+        <div class="family-row">
+          <span class="parents">김갑열 · 김기정</span>
+          <span class="relation">의 딸</span>
+          <span class="child">세영</span>
+        </div>
+      </div>
+    </div>
+    <div class="panel inner">
+      <p class="eyebrow">WEDDING DAY</p>
+      <p class="date-line">2026년 11월 7일 토요일</p>
+      <p class="time-line">오후 3시 30분</p>
+      <div class="calendar">
+        <span class="dow">일</span><span class="dow">월</span><span class="dow">화</span><span class="dow">수</span><span class="dow">목</span><span class="dow">금</span><span class="dow">토</span>
+        <span class="day sun">1</span><span class="day">2</span><span class="day">3</span><span class="day">4</span><span class="day">5</span><span class="day">6</span><span class="day dday">7</span>
+        <span class="day sun">8</span><span class="day">9</span><span class="day">10</span><span class="day">11</span><span class="day">12</span><span class="day">13</span><span class="day">14</span>
+        <span class="day sun">15</span><span class="day">16</span><span class="day">17</span><span class="day">18</span><span class="day">19</span><span class="day">20</span><span class="day">21</span>
+        <span class="day sun">22</span><span class="day">23</span><span class="day">24</span><span class="day">25</span><span class="day">26</span><span class="day">27</span><span class="day">28</span>
+        <span class="day sun">29</span><span class="day">30</span>
+      </div>
+      <div class="venue">
+        <p class="venue-name">W스퀘어컨벤션 8층 채플홀</p>
+        <p class="venue-addr">경기도 성남시 분당구 판교역로226번길 16</p>
+        <p class="venue-tel">031-703-0116</p>
+      </div>
+      <dl class="transport">
+        <div>
+          <dt>[ 자차 ]</dt>
+          <dd>내비게이션 '더블유스퀘어컨벤션' 입력 · 건물 내 주차 (2시간 무료)</dd>
+        </div>
+        <div>
+          <dt>[ 버스 ]</dt>
+          <dd>수서역 → 판교 101번 (H스퀘어·삼환하이펙스 하차)<br>서울역 → 판교 9007번 (엔씨소프트·안랩 하차)</dd>
+        </div>
+        <div>
+          <dt>[ 지하철 ]</dt>
+          <dd>신분당선 판교역 1번 출구 직진 도보 6분 · 셔틀버스 10분 간격</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+</body>
+</html>
