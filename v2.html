@@ -216,16 +216,8 @@
   }
 
   /* ---------- 오시는 길 ---------- */
-  .location { text-align: center; }
-  .place-name { font-size: 17px; font-weight: 600; }
-  .place-addr { font-size: 13.5px; color: var(--muted); margin-top: 6px; }
-  .place-tel {
-    font-size: 13.5px;
-    color: var(--muted);
-    margin-top: 2px;
-    font-variant-numeric: tabular-nums;
-  }
-  .place-tel a { color: inherit; text-decoration: none; }
+  .place-name { text-align: center; font-size: 16.5px; font-weight: 600; }
+  .place-addr { text-align: center; font-size: 13.5px; color: var(--muted); margin-top: 4px; }
 
   .map-embed {
     margin-top: 28px;
@@ -266,32 +258,34 @@
   .map-buttons {
     display: flex;
     gap: 8px;
-    margin-top: 16px;
+    margin-top: 28px;
   }
   .map-buttons a {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px;
-    height: 44px;
-    border: 1px solid #C9D6F5;
-    border-radius: 999px;
+    height: 48px;
     text-decoration: none;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: 600;
-    color: var(--cobalt);
-    background: #fff;
+    border-radius: 2px;
   }
-  .map-buttons a .arrow { font-size: 11px; }
+  .btn-naver { background: var(--cobalt); color: #fff; }
+  .btn-kakao { border: 1px solid var(--cobalt); color: var(--cobalt); background: #fff; }
 
   .transport {
-    margin-top: 44px;
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
-    gap: 26px;
+    gap: 24px;
   }
-  .transport dt { font-size: 14.5px; font-weight: 700; margin-bottom: 4px; }
+  .transport dt {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    color: var(--cobalt);
+    margin-bottom: 6px;
+  }
   .transport dd { font-size: 14.5px; color: #3A425F; }
 
   /* ---------- 마음 전하실 곳 (다크) ---------- */
@@ -570,12 +564,11 @@
   </section>
 
   <!-- 오시는 길 -->
-  <section class="location">
+  <section>
     <p class="eyebrow reveal">LOCATION</p>
     <div class="reveal">
       <p class="place-name">W스퀘어컨벤션 8층 채플홀</p>
       <p class="place-addr">경기도 성남시 분당구 판교역로226번길 16</p>
-      <p class="place-tel"><a href="tel:0317030116">031-703-0116</a></p>
     </div>
     <div class="map-embed reveal">
       <div class="map-tiles" aria-label="예식장 위치 지도">
@@ -592,21 +585,20 @@
       <span class="map-attr">© OpenStreetMap</span>
     </div>
     <div class="map-buttons reveal">
-      <a href="https://map.naver.com/p/search/W%EC%8A%A4%ED%80%98%EC%96%B4%EC%BB%A8%EB%B2%A4%EC%85%98" target="_blank" rel="noopener">네이버 지도 <span class="arrow">↗</span></a>
-      <a href="https://map.kakao.com/?q=W%EC%8A%A4%ED%80%98%EC%96%B4%EC%BB%A8%EB%B2%A4%EC%85%98" target="_blank" rel="noopener">카카오맵 <span class="arrow">↗</span></a>
-      <a href="tmap://search?name=W%EC%8A%A4%ED%80%98%EC%96%B4%EC%BB%A8%EB%B2%A4%EC%85%98" rel="noopener">티맵 <span class="arrow">↗</span></a>
+      <a class="btn-naver" href="https://map.naver.com/p/search/W%EC%8A%A4%ED%80%98%EC%96%B4%EC%BB%A8%EB%B2%A4%EC%85%98" target="_blank" rel="noopener">네이버 지도</a>
+      <a class="btn-kakao" href="https://map.kakao.com/?q=W%EC%8A%A4%ED%80%98%EC%96%B4%EC%BB%A8%EB%B2%A4%EC%85%98" target="_blank" rel="noopener">카카오맵</a>
     </div>
     <dl class="transport">
       <div class="reveal">
-        <dt>[ 자차 ]</dt>
+        <dt>CAR</dt>
         <dd>내비게이션에 '더블유스퀘어컨벤션' 입력<br>건물 내 주차 (2시간 무료)</dd>
       </div>
       <div class="reveal">
-        <dt>[ 버스 ]</dt>
+        <dt>BUS</dt>
         <dd>수서역 → 판교 : 101번 (H스퀘어·삼환하이펙스 하차)<br>서울역 → 판교 : 9007번 (엔씨소프트·안랩 하차)</dd>
       </div>
       <div class="reveal">
-        <dt>[ 지하철 ]</dt>
+        <dt>SUBWAY</dt>
         <dd>신분당선 판교역 1번 출구 직진 도보 6분<br>1번 출구 셔틀버스 운행 (10분 간격)</dd>
       </div>
     </dl>
