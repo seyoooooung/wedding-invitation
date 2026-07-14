@@ -223,6 +223,19 @@
   /* ---------- 오시는 길 ---------- */
   .place-name { text-align: center; font-size: 16.5px; font-weight: 600; }
   .place-addr { text-align: center; font-size: 13.5px; color: var(--mutedw); margin-top: 4px; }
+  .addr-copy {
+    margin-left: 6px;
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 2px;
+    cursor: pointer;
+    font-family: inherit;
+    vertical-align: 1px;
+  }
 
   .map-embed {
     margin-top: 28px;
@@ -599,7 +612,7 @@
     <p class="eyebrow reveal">LOCATION</p>
     <div class="reveal">
       <p class="place-name">W스퀘어컨벤션 8층 채플홀</p>
-      <p class="place-addr">경기도 성남시 분당구 판교역로226번길 16</p>
+      <p class="place-addr">경기도 성남시 분당구 판교역로226번길 16 <button class="addr-copy" type="button">주소 복사</button></p>
     </div>
     <div class="map-embed reveal">
       <div class="map-tiles" aria-label="예식장 위치 지도">
@@ -621,15 +634,15 @@
     </div>
     <dl class="transport">
       <div class="reveal">
-        <dt>CAR</dt>
+        <dt>자차</dt>
         <dd>내비게이션에 '더블유스퀘어컨벤션' 입력<br>건물 내 주차 (2시간 무료)</dd>
       </div>
       <div class="reveal">
-        <dt>BUS</dt>
+        <dt>버스</dt>
         <dd>수서역 → 판교 : 101번 (H스퀘어·삼환하이펙스 하차)<br>서울역 → 판교 : 9007번 (엔씨소프트·안랩 하차)</dd>
       </div>
       <div class="reveal">
-        <dt>SUBWAY</dt>
+        <dt>지하철</dt>
         <dd>신분당선 판교역 1번 출구 직진 도보 6분<br>1번 출구 셔틀버스 운행 (10분 간격)</dd>
       </div>
     </dl>
@@ -788,6 +801,13 @@
   document.querySelectorAll(".copy-btn").forEach(function (btn) {
     btn.addEventListener("click", function () {
       copyText(btn.getAttribute("data-copy"), "계좌번호가 복사되었습니다");
+    });
+  });
+
+  // 주소 복사
+  document.querySelectorAll(".addr-copy").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      copyText("경기도 성남시 분당구 판교역로226번길 16", "주소가 복사되었습니다");
     });
   });
 
