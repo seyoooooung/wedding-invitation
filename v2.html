@@ -220,49 +220,58 @@
     color: #454440;
   }
   .calendar {
-    margin-top: 44px;
+    margin-top: 46px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    row-gap: 6px;
+    row-gap: 12px;
     font-variant-numeric: tabular-nums;
   }
   .calendar .dow {
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--hairline);
-    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--ink);
+    padding-bottom: 12px;
+    text-align: center;
   }
+  .calendar .dow.sun { color: #B9B7B1; }
   .calendar .day {
-    height: 38px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13.5px;
-    color: #454440;
-  }
-  .calendar .day.sun { color: #C7C6C1; }
-  .calendar .day.dday {
+    font-size: 14px;
+    color: #514F4A;
     position: relative;
-    color: var(--ink);
-    font-weight: 700;
+  }
+  .calendar .day.sun { color: #C1BFB9; }
+  .calendar .day.dday {
+    color: #FFFFFF;
+    font-weight: 600;
     z-index: 0;
   }
   .calendar .day.dday::before {
     content: "";
     position: absolute;
-    width: 32px; height: 32px;
+    width: 35px; height: 35px;
     border-radius: 50%;
-    border: 1.2px solid var(--ink);
+    background: var(--ink);
     z-index: -1;
+  }
+  .calendar .dcap {
+    position: absolute;
+    top: calc(50% + 19px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: var(--muted);
+    white-space: nowrap;
+    font-weight: 400;
   }
 
   /* ---------- 갤러리 ---------- */
   .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
   }
   .ph {
     width: 100%;
@@ -642,8 +651,8 @@
       <p class="time-line">오후 3시 30분</p>
     </div>
     <div class="calendar reveal" aria-label="2026년 11월 달력">
-      <span class="dow">일</span><span class="dow">월</span><span class="dow">화</span><span class="dow">수</span><span class="dow">목</span><span class="dow">금</span><span class="dow">토</span>
-      <span class="day sun">1</span><span class="day">2</span><span class="day">3</span><span class="day">4</span><span class="day">5</span><span class="day">6</span><span class="day dday">7</span>
+      <span class="dow sun">일</span><span class="dow">월</span><span class="dow">화</span><span class="dow">수</span><span class="dow">목</span><span class="dow">금</span><span class="dow">토</span>
+      <span class="day sun">1</span><span class="day">2</span><span class="day">3</span><span class="day">4</span><span class="day">5</span><span class="day">6</span><span class="day dday">7<span class="dcap">오후 3:30</span></span>
       <span class="day sun">8</span><span class="day">9</span><span class="day">10</span><span class="day">11</span><span class="day">12</span><span class="day">13</span><span class="day">14</span>
       <span class="day sun">15</span><span class="day">16</span><span class="day">17</span><span class="day">18</span><span class="day">19</span><span class="day">20</span><span class="day">21</span>
       <span class="day sun">22</span><span class="day">23</span><span class="day">24</span><span class="day">25</span><span class="day">26</span><span class="day">27</span><span class="day">28</span>
