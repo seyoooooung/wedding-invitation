@@ -219,8 +219,16 @@
     font-size: 15px;
     color: #454440;
   }
-  .calendar {
+  .cal-month {
     margin-top: 46px;
+    text-align: center;
+    font-size: 15.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+  .calendar {
+    margin-top: 18px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     row-gap: 12px;
@@ -650,6 +658,7 @@
       <p class="date-line">2026년 11월 7일 토요일</p>
       <p class="time-line">오후 3시 30분</p>
     </div>
+    <p class="cal-month reveal">11월</p>
     <div class="calendar reveal" aria-label="2026년 11월 달력">
       <span class="dow sun">일</span><span class="dow">월</span><span class="dow">화</span><span class="dow">수</span><span class="dow">목</span><span class="dow">금</span><span class="dow">토</span>
       <span class="day sun">1</span><span class="day">2</span><span class="day">3</span><span class="day">4</span><span class="day">5</span><span class="day">6</span><span class="day dday">7<span class="dcap">오후 3:30</span></span>
