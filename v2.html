@@ -82,14 +82,14 @@
 
   .cover-date {
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 0.34em;
     text-indent: 0.34em;
     color: var(--muted);
     font-variant-numeric: tabular-nums;
   }
 
-  .cover-center { display: flex; flex-direction: column; align-items: center; gap: 26px; }
+  .cover-center { display: flex; flex-direction: column; align-items: center; gap: 42px; }
 
   .cover-eyebrow {
     font-family: var(--mono);
@@ -103,7 +103,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    gap: 15px;
     font-family: var(--mono);
     font-size: clamp(24px, 8.6vw, 37px);
     font-weight: 400;
@@ -113,23 +113,33 @@
     white-space: nowrap;
   }
 
-  .cover-names .rule {
-    width: 30px;
-    height: 1px;
-    background: rgba(62, 58, 51, 0.45);
+  .cover-names .amp {
+    font-size: 0.5em;
+    color: var(--muted);
+    letter-spacing: 0;
+    text-indent: 0;
+    line-height: 1;
   }
 
   .cover-bottom {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 34px;
     font-family: var(--mono);
-    font-size: clamp(10px, 3vw, 12px);
-    letter-spacing: 0.14em;
-    text-indent: 0.14em;
-    color: #4A4945;
-    line-height: 2.3;
+  }
+  .cover-when {
+    font-size: clamp(11px, 3.4vw, 13px);
+    letter-spacing: 0.22em;
+    text-indent: 0.22em;
+    color: var(--ink);
+  }
+  .cover-where {
+    margin-top: 9px;
+    font-size: clamp(9px, 2.8vw, 11px);
+    letter-spacing: 0.15em;
+    text-indent: 0.15em;
+    color: var(--muted);
   }
 
   .scroll-line {
@@ -559,12 +569,12 @@
       <p class="cover-eyebrow">THE MARRIAGE OF</p>
       <h1 class="cover-names">
         <span>LEE JUNGHUN</span>
-        <span class="rule" aria-hidden="true"></span>
+        <span class="amp">&amp;</span>
         <span>KIM SEYOUNG</span>
       </h1>
     </div>
     <div class="cover-bottom">
-      <p>SATURDAY 3:30 PM<br>W SQUARE CONVENTION 8F CHAPEL HALL</p>
+      <div><p class="cover-when">SATURDAY 3:30 PM</p><p class="cover-where">W SQUARE CONVENTION 8F CHAPEL HALL</p></div>
       <div class="scroll-line" aria-hidden="true"></div>
     </div>
   </header>
