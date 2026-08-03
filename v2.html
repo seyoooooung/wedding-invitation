@@ -30,12 +30,16 @@
 
   html {
     -webkit-text-size-adjust: 100%;
-    overscroll-behavior-y: none;
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
     background: #FFFFFF;
   }
 
   body {
-    overscroll-behavior-y: none;
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
     background: var(--ground);
     font-family: "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif;
     color: var(--ink);
@@ -43,6 +47,12 @@
     word-break: keep-all;
   }
 
+  .scroll-wrap {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
   .page {
     max-width: 480px;
     margin: 0 auto;
@@ -625,6 +635,7 @@
 <body>
 
 
+<div class="scroll-wrap">
 <div class="page">
 
   <!-- 커버 -->
@@ -809,6 +820,7 @@
   <button class="lb-nav next" type="button" id="lb-next" aria-label="다음 사진"><span class="chev" aria-hidden="true"></span></button>
   <span class="lb-count" id="lb-count"></span>
 </div>
+</div>
 
 <div class="grain" aria-hidden="true"></div>
 
@@ -845,21 +857,33 @@
     document.head.appendChild(s);
   })();
 
-  // 스크롤 진입 시 서서히 나타나는 효과
+  // 스크롤 진입 시 서서히 나타나는 효과 (스크롤 이벤트 기반)
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var reveals = document.querySelectorAll(".reveal");
-  if (reduceMotion || !("IntersectionObserver" in window)) {
+  var reveals = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+  var scroller = document.querySelector(".scroll-wrap");
+  if (reduceMotion) {
     reveals.forEach(function (el) { el.classList.add("in"); });
   } else {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in");
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    reveals.forEach(function (el) { io.observe(el); });
+    var checkReveals = function () {
+      var vh = window.innerHeight;
+      for (var i = 0; i < reveals.length; i++) {
+        var el = reveals[i];
+        if (el.classList.contains("in")) continue;
+        var r = el.getBoundingClientRect();
+        if (r.top < vh * 0.92 && r.bottom > 0) el.classList.add("in");
+      }
+    };
+    (scroller || window).addEventListener("scroll", checkReveals, { passive: true });
+    window.addEventListener("touchmove", checkReveals, { passive: true });
+    window.addEventListener("resize", checkReveals);
+    checkReveals();
+    var revealTimer = setInterval(function () {
+      checkReveals();
+      for (var i = 0; i < reveals.length; i++) {
+        if (!reveals[i].classList.contains("in")) return;
+      }
+      clearInterval(revealTimer);
+    }, 500);
   }
 
   // 토스트
@@ -937,10 +961,14 @@
     lbShow(i);
     lb.classList.add("open");
     document.body.style.overflow = "hidden";
+    var sw = document.querySelector(".scroll-wrap");
+    if (sw) sw.style.overflow = "hidden";
   }
   function lbClose() {
     lb.classList.remove("open");
     document.body.style.overflow = "";
+    var sw2 = document.querySelector(".scroll-wrap");
+    if (sw2) sw2.style.overflow = "";
   }
 
   lbImgs.forEach(function (img, i) {
