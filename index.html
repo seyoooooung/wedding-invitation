@@ -617,7 +617,10 @@
     max-height: 82svh;
     object-fit: contain;
     display: block;
+    opacity: 0;
+    transition: opacity 0.22s ease;
   }
+  .lightbox .lb-img.ready { opacity: 1; }
   .lb-close {
     position: absolute;
     top: 10px; right: 10px;
@@ -1156,28 +1159,38 @@
     return lbImgs.filter(function (el) { return el.offsetParent !== null; });
   }
 
-  function lbShow(i) {
+  function lbShow(i, immediate) {
     lbIndex = (i + lbList.length) % lbList.length;
     var el = lbList[lbIndex];
-    var full = el.getAttribute("data-full");
-    lbImg.src = el.currentSrc || el.src;
+    var full = el.getAttribute("data-full") || el.currentSrc || el.src;
+    var thumb = el.currentSrc || el.src;
     lbImg.alt = el.getAttribute("aria-label") || "웨딩 사진 크게 보기";
-    clearTimeout(hiT);
-    if (full) {
-      hiT = setTimeout(function () {
-        var hi = new Image();
-        var want = lbIndex;
-        hi.onload = function () { if (want === lbIndex) lbImg.src = full; };
-        hi.src = full;
-      }, 250);
-    }
     lbCount.textContent = (lbIndex + 1) + " / " + lbList.length;
+    clearTimeout(hiT);
+    lbImg.classList.remove("ready");
+    var want = lbIndex;
+    function load() {
+      var hi = new Image();
+      hi.onload = function () {
+        if (want !== lbIndex) return;
+        lbImg.src = full;
+        lbImg.classList.add("ready");
+      };
+      hi.onerror = function () {
+        if (want !== lbIndex) return;
+        lbImg.src = thumb;
+        lbImg.classList.add("ready");
+      };
+      hi.src = full;
+    }
+    if (immediate) load();
+    else hiT = setTimeout(load, 220);
   }
   function lbOpen(el) {
     lbList = visibleImgs();
     var i = lbList.indexOf(el);
     lbReturnTo = el;
-    lbShow(i < 0 ? 0 : i);
+    lbShow(i < 0 ? 0 : i, true);
     lb.classList.add("open");
     lb.setAttribute("aria-hidden", "false");
     var sw = document.querySelector(".scroll-wrap");
@@ -1188,6 +1201,7 @@
     lb.classList.remove("open");
     lb.setAttribute("aria-hidden", "true");
     clearTimeout(hiT);
+    lbImg.classList.remove("ready");
     var sw2 = document.querySelector(".scroll-wrap");
     if (sw2) sw2.style.overflow = "";
     if (lbReturnTo && lbReturnTo.offsetParent !== null) lbReturnTo.focus();
