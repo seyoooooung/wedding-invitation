@@ -89,7 +89,8 @@
     display: block;
     z-index: 0;
     opacity: 0;
-    transition: opacity 0.85s ease;
+    transition: opacity 1.7s ease-out 0.25s;
+    will-change: opacity;
   }
   .cover-bg.shown { opacity: 1; }
   .cover::before {
@@ -113,13 +114,7 @@
     pointer-events: none;
     z-index: 2;
   }
-  .cover-center, .cover-bottom {
-    position: relative;
-    z-index: 3;
-    opacity: 0;
-    transition: opacity 0.85s ease 0.15s;
-  }
-  .cover.ready .cover-center, .cover.ready .cover-bottom { opacity: 1; }
+  .cover-center, .cover-bottom { position: relative; z-index: 3; }
   .scroll-line { z-index: 3; }
 
   .cover-date {
@@ -717,9 +712,7 @@
   (function () {
     function show() {
       var img = document.querySelector(".cover-bg");
-      var cover = document.querySelector(".cover");
       if (img) img.classList.add("shown");
-      if (cover) cover.classList.add("ready");
     }
     function start() {
       var img = document.querySelector(".cover-bg");
@@ -727,12 +720,18 @@
       // 사진 로딩 + 레이아웃 안정(2프레임 + 여유)을 모두 기다린 뒤 페이드 인
       var done = img.complete && img.naturalWidth > 0;
       var reveal = function () {
-        requestAnimationFrame(function () {
-          requestAnimationFrame(function () { setTimeout(show, 120); });
-        });
+        // 브라우저 바가 자리 잡고 높이가 두 번 연속 같아질 때까지 기다린 뒤 표시
+        var last = window.innerHeight, stable = 0;
+        (function settle() {
+          var h = window.innerHeight;
+          stable = (h === last) ? stable + 1 : 0;
+          last = h;
+          if (stable >= 3) { requestAnimationFrame(show); return; }
+          setTimeout(settle, 90);
+        })();
       };
       if (done) reveal(); else { img.addEventListener("load", reveal); img.addEventListener("error", reveal); }
-      setTimeout(show, 2500);
+      setTimeout(show, 3500);
     }
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
     else start();
