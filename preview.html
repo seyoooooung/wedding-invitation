@@ -26,6 +26,7 @@
     --hairline: #E8E7E3;
     --paper: #FFFFFF;
     --ground: #EFEEEB;
+    --body-c: #454440;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -102,11 +103,11 @@
     pointer-events: none;
     z-index: 1;
     background: linear-gradient(to bottom,
-      rgba(20, 22, 19, 0.30) 0%,
-      rgba(20, 22, 19, 0.12) 20%,
-      rgba(20, 22, 19, 0.34) 48%,
-      rgba(20, 22, 19, 0.24) 68%,
-      rgba(20, 22, 19, 0.62) 100%);
+      rgba(20, 22, 19, 0.38) 0%,
+      rgba(20, 22, 19, 0.26) 20%,
+      rgba(20, 22, 19, 0.42) 48%,
+      rgba(20, 22, 19, 0.38) 68%,
+      rgba(20, 22, 19, 0.70) 100%);
   }
   .cover::after {
     content: "";
@@ -119,15 +120,6 @@
   .cover-center, .cover-bottom { position: relative; z-index: 3; }
   .scroll-line { z-index: 3; }
 
-  .cover-date {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.34em;
-    text-indent: 0.34em;
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-  }
-
   .cover-center { display: flex; flex-direction: column; align-items: center; gap: 42px; margin: auto 0; }
 
   .cover-eyebrow {
@@ -135,8 +127,8 @@
     font-size: 12px;
     letter-spacing: 0.42em;
     text-indent: 0.42em;
-    color: rgba(255, 255, 255, 0.92);
-    text-shadow: 0 1px 10px rgba(20, 22, 19, 0.5);
+    color: #FFFFFF;
+    text-shadow: 0 0 6px rgba(20, 22, 19, 0.95), 0 1px 3px rgba(20, 22, 19, 0.9), 0 2px 16px rgba(20, 22, 19, 0.7);
   }
 
   .cover-names {
@@ -152,7 +144,7 @@
     line-height: 1.15;
     white-space: nowrap;
     color: #FFFFFF;
-    text-shadow: 0 1px 12px rgba(20, 22, 19, 0.35);
+    text-shadow: 0 1px 4px rgba(20, 22, 19, 0.5), 0 2px 18px rgba(20, 22, 19, 0.45);
   }
 
   .cover-names .amp {
@@ -174,22 +166,15 @@
     font-size: 15px;
     letter-spacing: 0.01em;
     color: #FFFFFF;
-    text-shadow: 0 1px 10px rgba(20, 22, 19, 0.4);
-  }
-  .cover-time {
-    margin-top: 8px;
-    font-size: clamp(10px, 3vw, 12px);
-    letter-spacing: 0.22em;
-    text-indent: 0.22em;
-    color: var(--ink);
+    text-shadow: 0 1px 3px rgba(20, 22, 19, 0.8), 0 2px 14px rgba(20, 22, 19, 0.55);
   }
   .cover-where {
     margin-top: 10px;
     font-family: "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
     font-size: 14px;
     letter-spacing: 0.01em;
-    color: rgba(255, 255, 255, 0.88);
-    text-shadow: 0 1px 10px rgba(20, 22, 19, 0.4);
+    color: #FFFFFF;
+    text-shadow: 0 1px 3px rgba(20, 22, 19, 0.8), 0 2px 14px rgba(20, 22, 19, 0.55);
   }
 
   .scroll-line {
@@ -257,9 +242,9 @@
     font-size: 16px;
   }
   .family-row { display: flex; align-items: baseline; gap: 10px; }
-  .family-row .parents { color: var(--muted); letter-spacing: 0.06em; }
+  .family-row .parents { color: var(--muted); letter-spacing: 0.01em; }
   .family-row .relation { font-size: 14px; color: var(--muted); }
-  .family-row .child { font-weight: 500; letter-spacing: 0.12em; }
+  .family-row .child { font-weight: 600; letter-spacing: 0; }
 
   /* ---------- 예식 안내 ---------- */
   .when-where { text-align: center; }
@@ -276,9 +261,9 @@
   .cal-month {
     margin-top: 46px;
     text-align: center;
-    font-size: 16.5px;
+    font-size: 16px;
     font-weight: 700;
-    letter-spacing: 0.04em;
+    letter-spacing: 0;
     color: var(--ink);
   }
   .calendar {
@@ -294,7 +279,7 @@
     padding-bottom: 12px;
     text-align: center;
   }
-  .calendar .dow.sun { color: #95938D; }
+  .calendar .dow.sun { color: #767471; }
   .calendar .day {
     height: 44px;
     display: flex;
@@ -323,7 +308,7 @@
     top: calc(50% + 19px);
     left: 50%;
     transform: translateX(-50%);
-    font-size: 11px;
+    font-size: 13px;
     color: var(--muted);
     white-space: nowrap;
     font-weight: 400;
@@ -337,6 +322,7 @@
   }
   .ph {
     width: 100%;
+    height: auto;
     aspect-ratio: 1 / 1;
     object-fit: cover;
     display: block;
@@ -352,14 +338,14 @@
     gap: 10px;
     width: 100%;
     margin-top: 30px;
-    padding: 4px 0;
+    padding: 8px 0;
     border: none;
     background: transparent;
     color: var(--body-c);
     font-family: inherit;
     font-size: 14px;
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.01em;
     cursor: pointer;
   }
   .gallery-more .chev-down {
@@ -373,19 +359,23 @@
   /* ---------- 오시는 길 ---------- */
   .place-name { text-align: center; font-size: 21px; font-weight: 600; }
   .place-addr { text-align: center; font-size: 15.5px; color: var(--muted); margin-top: 4px; }
+  .addr-copy-wrap { text-align: center; margin-top: 12px; }
   .addr-copy {
-    margin-left: 6px;
-    border: 1px solid var(--cobalt);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    border: 1px solid rgba(26, 26, 24, 0.55);
     background: transparent;
     color: var(--cobalt);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
-    padding: 4px 9px;
+    padding: 0 18px;
     border-radius: 2px;
     cursor: pointer;
     font-family: inherit;
-    vertical-align: 1px;
   }
+  .addr-copy:active { background: rgba(26, 26, 24, 0.06); }
 
   .map-frame {
     margin-top: 28px;
@@ -427,13 +417,13 @@
     gap: 30px;
   }
   .transport dt {
-    font-size: 16.5px;
+    font-size: 16px;
     font-weight: 700;
-    letter-spacing: 0.04em;
+    letter-spacing: 0;
     color: var(--ink);
     margin-bottom: 9px;
   }
-  .transport dd { font-size: 15.5px; color: #72706A; line-height: 1.85; }
+  .transport dd { font-size: 15.5px; color: #6B6963; line-height: 1.85; }
 
   /* ---------- 마음 전하실 곳 (다크) ---------- */
   .dark {
@@ -455,7 +445,7 @@
     text-align: center;
     font-size: 16.5px;
     font-weight: 600;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.01em;
   }
   .dark .title-rule {
     width: 28px;
@@ -497,23 +487,29 @@
 
   .account-row {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
     padding: 15px 16px;
     border-top: 1px solid rgba(30, 44, 34, 0.1);
   }
-  .account-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .account-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1 1 170px; }
   .account-holder { font-size: 15px; color: #5F625C; }
   .account-number { font-size: 15.5px; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
   .copy-btn {
     flex-shrink: 0;
-    border: 1px solid rgba(26, 26, 24, 0.45);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 58px;
+    border: 1px solid rgba(26, 26, 24, 0.55);
     background: transparent;
     color: var(--ink);
     font-size: 13.5px;
     font-weight: 600;
-    padding: 8px 13px;
+    padding: 0 16px;
     border-radius: 2px;
     cursor: pointer;
     font-family: inherit;
@@ -584,7 +580,7 @@
   }
   .footer-date {
     font-family: var(--mono);
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 0.3em;
     text-indent: 0.3em;
     color: #5C665F;
@@ -613,10 +609,12 @@
     pointer-events: none;
     transition: opacity 0.25s ease;
   }
-  .lightbox.open { opacity: 1; pointer-events: auto; }
+  .lightbox:not(.open) { visibility: hidden; }
+  .lightbox.open { opacity: 1; pointer-events: auto; visibility: visible; }
   .lightbox .lb-img {
     max-width: calc(100% - 36px);
     max-height: 82vh;
+    max-height: 82svh;
     object-fit: contain;
     display: block;
   }
@@ -657,7 +655,7 @@
     left: 50%;
     transform: translateX(-50%);
     color: rgba(255,255,255,0.75);
-    font-size: 12.5px;
+    font-size: 14px;
     letter-spacing: 0.12em;
     font-variant-numeric: tabular-nums;
   }
@@ -679,7 +677,7 @@
     transform: translateX(-50%) translateY(16px);
     background: var(--ink);
     color: #fff;
-    font-size: 13.5px;
+    font-size: 15px;
     padding: 12px 22px;
     border-radius: 2px;
     opacity: 0;
@@ -698,14 +696,43 @@
     line-height: inherit !important;
   }
 
-  a:focus-visible, button:focus-visible, summary:focus-visible {
+  a:focus-visible, button:focus-visible, summary:focus-visible,
+  .ph:focus-visible {
     outline: 2px solid var(--cobalt);
     outline-offset: 2px;
+  }
+  .lightbox button:focus-visible { outline-color: #FFFFFF; }
+
+  .sr-only {
+    position: absolute;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (orientation: landscape) and (max-height: 560px) {
+    .cover { min-height: 0; padding: 28px 40px 40px; }
+    .cover-center { gap: 18px; }
+    .cover-names { font-size: clamp(20px, 5.2vh, 30px); gap: 8px; }
+    .scroll-line { display: none; }
+  }
+
+  @media (max-width: 359px) {
+    .cover { padding-left: 24px; padding-right: 24px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1; transform: none; transition: none; }
     .scroll-line::after { animation: none; }
+  }
+
+  @media (scripting: none) {
+    .reveal { opacity: 1; transform: none; }
+    .cover-bg { opacity: 1; }
   }
 </style>
 </head>
@@ -751,6 +778,16 @@
       setTimeout(lockAndShow, 2500);
     }
 
+    var relockT;
+    window.addEventListener("orientationchange", function () {
+      clearTimeout(relockT);
+      relockT = setTimeout(function () {
+        if (!revealed || !img || !cover) return;
+        img.style.width = cover.clientWidth + "px";
+        img.style.height = cover.clientHeight + "px";
+      }, 350);
+    });
+
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
     else start();
   })();
@@ -762,10 +799,11 @@
 
   <!-- 커버 -->
   <header class="cover">
-    <img class="cover-bg" src="cover.jpg" alt="이정훈 김세영 웨딩 사진" fetchpriority="high">
+    <img class="cover-bg" src="cover.jpg" alt="" fetchpriority="high">
     <div class="cover-center">
       <p class="cover-eyebrow">THE MARRIAGE OF</p>
       <h1 class="cover-names">
+        <span class="sr-only">이정훈 · 김세영 결혼합니다</span>
         <span>LEE JUNGHUN</span>
         <span class="amp">&amp;</span>
         <span>KIM SEYOUNG</span>
@@ -780,7 +818,7 @@
 
   <!-- 인사말 -->
   <section>
-    <p class="eyebrow reveal">INVITATION</p>
+    <h2 class="eyebrow reveal">INVITATION</h2>
     <p class="greeting-body reveal">
       특별한 날보다 보통의 하루를<br>
       함께하고 싶은 사람을 만났습니다.<br><br>
@@ -803,15 +841,15 @@
 
   <!-- 예식 안내 -->
   <section class="when-where">
-    <p class="eyebrow reveal">WEDDING DAY</p>
+    <h2 class="eyebrow reveal">WEDDING DAY</h2>
     <div class="reveal">
       <p class="date-line">2026년 11월 7일 토요일</p>
       <p class="time-line">오후 3시 30분</p>
     </div>
     <p class="cal-month reveal">11월</p>
-    <div class="calendar reveal" aria-label="2026년 11월 달력">
+    <div class="calendar reveal" role="img" aria-label="2026년 11월 달력, 11월 7일 토요일 오후 3시 30분 예식">
       <span class="dow sun">일</span><span class="dow">월</span><span class="dow">화</span><span class="dow">수</span><span class="dow">목</span><span class="dow">금</span><span class="dow">토</span>
-      <span class="day sun">1</span><span class="day">2</span><span class="day">3</span><span class="day">4</span><span class="day">5</span><span class="day">6</span><span class="day dday">7<span class="dcap">오후 3:30</span></span>
+      <span class="day sun">1</span><span class="day">2</span><span class="day">3</span><span class="day">4</span><span class="day">5</span><span class="day">6</span><span class="day dday">7<span class="dcap">오후 3:30</span><span class="sr-only">결혼식 당일</span></span>
       <span class="day sun">8</span><span class="day">9</span><span class="day">10</span><span class="day">11</span><span class="day">12</span><span class="day">13</span><span class="day">14</span>
       <span class="day sun">15</span><span class="day">16</span><span class="day">17</span><span class="day">18</span><span class="day">19</span><span class="day">20</span><span class="day">21</span>
       <span class="day sun">22</span><span class="day">23</span><span class="day">24</span><span class="day">25</span><span class="day">26</span><span class="day">27</span><span class="day">28</span>
@@ -821,10 +859,11 @@
 
   <!-- 오시는 길 -->
   <section>
-    <p class="eyebrow reveal">LOCATION</p>
+    <h2 class="eyebrow reveal">LOCATION</h2>
     <div class="reveal">
       <p class="place-name">W스퀘어컨벤션 8층 채플홀</p>
-      <p class="place-addr">경기도 성남시 분당구 판교역로226번길 16 <button class="addr-copy" type="button">주소 복사</button></p>
+      <p class="place-addr">경기도 성남시 분당구 판교역로226번길 16</p>
+      <div class="addr-copy-wrap"><button class="addr-copy" type="button">주소 복사</button></div>
     </div>
     <div class="map-frame reveal">
       <div id="naver-map"></div>
@@ -851,35 +890,35 @@
 
   <!-- 갤러리 -->
   <section>
-    <p class="eyebrow reveal">GALLERY</p>
+    <h2 class="eyebrow reveal">GALLERY</h2>
     <div class="grid reveal collapsed" id="gallery-grid">
-      <img class="ph wide" src="photos/thumb/01.jpg" data-full="photos/full/01.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/02.jpg" data-full="photos/full/02.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/03.jpg" data-full="photos/full/03.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/04.jpg" data-full="photos/full/04.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/05.jpg" data-full="photos/full/05.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/06.jpg" data-full="photos/full/06.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/07.jpg" data-full="photos/full/07.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/08.jpg" data-full="photos/full/08.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/09.jpg" data-full="photos/full/09.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/10.jpg" data-full="photos/full/10.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/11.jpg" data-full="photos/full/11.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/12.jpg" data-full="photos/full/12.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/13.jpg" data-full="photos/full/13.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/14.jpg" data-full="photos/full/14.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/15.jpg" data-full="photos/full/15.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/16.jpg" data-full="photos/full/16.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/17.jpg" data-full="photos/full/17.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/18.jpg" data-full="photos/full/18.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
-      <img class="ph" src="photos/thumb/19.jpg" data-full="photos/full/19.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
+      <img class="ph wide" src="photos/thumb/01.jpg" data-full="photos/full/01.jpg" width="1200" height="900" alt="" role="button" tabindex="0" aria-label="웨딩 사진 1번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/02.jpg" data-full="photos/full/02.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 2번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/03.jpg" data-full="photos/full/03.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 3번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/04.jpg" data-full="photos/full/04.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 4번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/05.jpg" data-full="photos/full/05.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 5번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/06.jpg" data-full="photos/full/06.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 6번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/07.jpg" data-full="photos/full/07.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 7번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/08.jpg" data-full="photos/full/08.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 8번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/09.jpg" data-full="photos/full/09.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 9번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/10.jpg" data-full="photos/full/10.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 10번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/11.jpg" data-full="photos/full/11.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 11번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/12.jpg" data-full="photos/full/12.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 12번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/13.jpg" data-full="photos/full/13.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 13번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/14.jpg" data-full="photos/full/14.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 14번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/15.jpg" data-full="photos/full/15.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 15번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/16.jpg" data-full="photos/full/16.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 16번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/17.jpg" data-full="photos/full/17.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 17번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/18.jpg" data-full="photos/full/18.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 18번, 크게 보기" loading="lazy" decoding="async">
+      <img class="ph" src="photos/thumb/19.jpg" data-full="photos/full/19.jpg" width="400" height="400" alt="" role="button" tabindex="0" aria-label="웨딩 사진 19번, 크게 보기" loading="lazy" decoding="async">
     </div>
-    <button class="gallery-more reveal" type="button" id="gallery-more"><span class="chev-down" aria-hidden="true"></span><span>더 보기</span></button>
+    <button class="gallery-more reveal" type="button" id="gallery-more"><span>더 보기</span><span class="chev-down" aria-hidden="true"></span></button>
   </section>
 
   <!-- 마음 전하실 곳 + 공유 (다크) -->
   <div class="dark">
     <p class="dark-eyebrow reveal">WITH GRATITUDE</p>
-    <p class="section-title reveal">마음 전하실 곳</p>
+    <h2 class="section-title reveal">마음 전하실 곳</h2>
     <div class="title-rule" aria-hidden="true"></div>
 
     <div class="reveal">
@@ -951,13 +990,14 @@
 
 </div>
 
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="사진 크게 보기">
-  <img class="lb-img" id="lb-img" src="" alt="웨딩 사진 크게 보기">
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="사진 크게 보기" aria-hidden="true">
+  <img class="lb-img" id="lb-img" alt="웨딩 사진 크게 보기">
   <button class="lb-close" type="button" id="lb-close" aria-label="닫기">&times;</button>
   <button class="lb-nav prev" type="button" id="lb-prev" aria-label="이전 사진"><span class="chev" aria-hidden="true"></span></button>
   <button class="lb-nav next" type="button" id="lb-next" aria-label="다음 사진"><span class="chev" aria-hidden="true"></span></button>
   <span class="lb-count" id="lb-count"></span>
-</div>
 </div>
 
 <div class="grain" aria-hidden="true"></div>
@@ -987,7 +1027,11 @@
         return true;
       } catch (e) { return false; }
     }
-    window.navermap_authFailure = fallbackMap;
+    window.navermap_authFailure = function () {
+      var el = document.getElementById("naver-map");
+      if (el) el.dataset.done = "";
+      fallbackMap();
+    };
     var s = document.createElement("script");
     s.src = "https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=7lg2rjsf94";
     s.onload = function () { if (!initNaverMap()) fallbackMap(); };
@@ -1015,12 +1059,14 @@
     window.addEventListener("touchmove", checkReveals, { passive: true });
     window.addEventListener("resize", checkReveals);
     checkReveals();
+    var revealTicks = 0;
     var revealTimer = setInterval(function () {
       checkReveals();
+      var pending = false;
       for (var i = 0; i < reveals.length; i++) {
-        if (!reveals[i].classList.contains("in")) return;
+        if (!reveals[i].classList.contains("in")) { pending = true; break; }
       }
-      clearInterval(revealTimer);
+      if (!pending || ++revealTicks > 60) clearInterval(revealTimer);
     }, 500);
   }
 
@@ -1102,35 +1148,60 @@
   var lbCount = document.getElementById("lb-count");
   var lbIndex = 0;
 
+  var lbList = lbImgs;
+  var lbReturnTo = null;
+  var hiT;
+
+  function visibleImgs() {
+    return lbImgs.filter(function (el) { return el.offsetParent !== null; });
+  }
+
   function lbShow(i) {
-    lbIndex = (i + lbImgs.length) % lbImgs.length;
-    var el = lbImgs[lbIndex];
+    lbIndex = (i + lbList.length) % lbList.length;
+    var el = lbList[lbIndex];
     var full = el.getAttribute("data-full");
     lbImg.src = el.currentSrc || el.src;
+    lbImg.alt = el.getAttribute("aria-label") || "웨딩 사진 크게 보기";
+    clearTimeout(hiT);
     if (full) {
-      var hi = new Image();
-      var want = lbIndex;
-      hi.onload = function () { if (want === lbIndex) lbImg.src = full; };
-      hi.src = full;
+      hiT = setTimeout(function () {
+        var hi = new Image();
+        var want = lbIndex;
+        hi.onload = function () { if (want === lbIndex) lbImg.src = full; };
+        hi.src = full;
+      }, 250);
     }
-    lbCount.textContent = (lbIndex + 1) + " / " + lbImgs.length;
+    lbCount.textContent = (lbIndex + 1) + " / " + lbList.length;
   }
-  function lbOpen(i) {
-    lbShow(i);
+  function lbOpen(el) {
+    lbList = visibleImgs();
+    var i = lbList.indexOf(el);
+    lbReturnTo = el;
+    lbShow(i < 0 ? 0 : i);
     lb.classList.add("open");
-    document.body.style.overflow = "hidden";
+    lb.setAttribute("aria-hidden", "false");
     var sw = document.querySelector(".scroll-wrap");
     if (sw) sw.style.overflow = "hidden";
+    document.getElementById("lb-close").focus();
   }
   function lbClose() {
     lb.classList.remove("open");
-    document.body.style.overflow = "";
+    lb.setAttribute("aria-hidden", "true");
+    clearTimeout(hiT);
     var sw2 = document.querySelector(".scroll-wrap");
     if (sw2) sw2.style.overflow = "";
+    if (lbReturnTo && lbReturnTo.offsetParent !== null) lbReturnTo.focus();
+    lbReturnTo = null;
   }
 
-  lbImgs.forEach(function (img, i) {
-    img.addEventListener("click", function () { lbOpen(i); });
+  lbImgs.forEach(function (img) {
+    img.addEventListener("click", function () { lbOpen(img); });
+    img.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
+        e.preventDefault();
+        lbOpen(img);
+      }
+    });
   });
   document.getElementById("lb-close").addEventListener("click", lbClose);
   document.getElementById("lb-prev").addEventListener("click", function (e) { e.stopPropagation(); lbShow(lbIndex - 1); });
