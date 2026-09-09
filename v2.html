@@ -64,13 +64,9 @@
 
   /* ---------- 커버 ---------- */
   .cover {
-    height: var(--cover-h, 100svh);
-    min-height: 560px;
-    max-height: 900px;
+    height: min(calc(100vw * 1.86), 880px);
+    min-height: 520px;
     background-color: #2A2C28;
-    background-image: url("cover.jpg");
-    background-size: cover;
-    background-position: 50% 22%;
     color: #FFFFFF;
     display: flex;
     flex-direction: column;
@@ -80,11 +76,22 @@
     padding: 64px 40px 92px;
     position: relative;
   }
+  .cover-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 22%;
+    display: block;
+    z-index: 0;
+  }
   .cover::before {
     content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;
+    z-index: 1;
     background: linear-gradient(to bottom,
       rgba(20, 22, 19, 0.30) 0%,
       rgba(20, 22, 19, 0.12) 20%,
@@ -98,8 +105,10 @@
     inset: 16px;
     border: 1px solid rgba(255, 255, 255, 0.5);
     pointer-events: none;
+    z-index: 2;
   }
-  .cover-center, .cover-bottom { position: relative; z-index: 1; }
+  .cover-center, .cover-bottom { position: relative; z-index: 3; }
+  .scroll-line { z-index: 3; }
 
   .cover-date {
     font-family: var(--mono);
@@ -692,20 +701,6 @@
 </style>
 </head>
 <body>
-<script>
-  (function () {
-    var root = document.documentElement, lockedW = window.innerWidth;
-    function lock() {
-      root.style.setProperty("--cover-h", window.innerHeight + "px");
-      lockedW = window.innerWidth;
-    }
-    lock();
-    window.addEventListener("resize", function () {
-      if (Math.abs(window.innerWidth - lockedW) > 40) lock();
-    });
-    window.addEventListener("orientationchange", function () { setTimeout(lock, 250); });
-  })();
-</script>
 
 
 <div class="scroll-wrap">
@@ -713,6 +708,7 @@
 
   <!-- 커버 -->
   <header class="cover">
+    <img class="cover-bg" src="cover.jpg" alt="이정훈 김세영 웨딩 사진" fetchpriority="high" decoding="async">
     <div class="cover-center">
       <p class="cover-eyebrow">THE MARRIAGE OF</p>
       <h1 class="cover-names">
