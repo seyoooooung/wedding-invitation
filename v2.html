@@ -309,6 +309,23 @@
     background: #E9EDF9;
   }
   .ph.wide { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
+  .grid.collapsed .ph:nth-child(n+8) { display: none; }
+  .gallery-more {
+    display: block;
+    width: 100%;
+    margin-top: 16px;
+    height: 48px;
+    border: 1px solid var(--cobalt);
+    background: transparent;
+    color: var(--cobalt);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .gallery-more:active { background: rgba(26, 26, 24, 0.06); }
 
   /* ---------- 오시는 길 ---------- */
   .place-name { text-align: center; font-size: 19.5px; font-weight: 600; }
@@ -743,7 +760,7 @@
   <!-- 갤러리 -->
   <section>
     <p class="eyebrow reveal">GALLERY</p>
-    <div class="grid reveal">
+    <div class="grid reveal collapsed" id="gallery-grid">
       <img class="ph wide" src="photos/thumb/01.jpg" data-full="photos/full/01.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
       <img class="ph" src="photos/thumb/02.jpg" data-full="photos/full/02.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
       <img class="ph" src="photos/thumb/03.jpg" data-full="photos/full/03.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
@@ -764,6 +781,7 @@
       <img class="ph" src="photos/thumb/18.jpg" data-full="photos/full/18.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
       <img class="ph" src="photos/thumb/19.jpg" data-full="photos/full/19.jpg" alt="웨딩 사진" loading="lazy" decoding="async">
     </div>
+    <button class="gallery-more reveal" type="button" id="gallery-more">사진 더보기 (12장)</button>
   </section>
 
   <!-- 마음 전하실 곳 + 공유 (다크) -->
@@ -976,6 +994,18 @@
       copyText(window.location.href, "청첩장 링크가 복사되었습니다");
     }
   });
+
+  // 갤러리 더보기
+  (function () {
+    var grid = document.getElementById("gallery-grid");
+    var more = document.getElementById("gallery-more");
+    if (!grid || !more) return;
+    more.addEventListener("click", function () {
+      grid.classList.remove("collapsed");
+      more.remove();
+      if (typeof checkReveals === "function") checkReveals();
+    });
+  })();
 
   // 갤러리 라이트박스
   var lbImgs = Array.prototype.slice.call(document.querySelectorAll(".grid img"));
