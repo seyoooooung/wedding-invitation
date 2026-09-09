@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
 <title>이정훈 · 김세영 결혼합니다</title>
+<link rel="preload" as="image" href="cover.jpg" fetchpriority="high">
 <meta property="og:type" content="website">
 <meta property="og:title" content="이정훈 · 김세영 결혼합니다">
 <meta property="og:description" content="2026년 11월 7일 토요일 오후 3시 30분 · W스퀘어컨벤션 8층 채플홀">
@@ -63,8 +64,7 @@
 
   /* ---------- 커버 ---------- */
   .cover {
-    height: 100vh;
-    height: 100svh;
+    height: var(--cover-h, 100svh);
     min-height: 560px;
     max-height: 900px;
     background-color: #2A2C28;
@@ -692,6 +692,20 @@
 </style>
 </head>
 <body>
+<script>
+  (function () {
+    var root = document.documentElement, lockedW = window.innerWidth;
+    function lock() {
+      root.style.setProperty("--cover-h", window.innerHeight + "px");
+      lockedW = window.innerWidth;
+    }
+    lock();
+    window.addEventListener("resize", function () {
+      if (Math.abs(window.innerWidth - lockedW) > 40) lock();
+    });
+    window.addEventListener("orientationchange", function () { setTimeout(lock, 250); });
+  })();
+</script>
 
 
 <div class="scroll-wrap">
