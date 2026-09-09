@@ -64,9 +64,8 @@
 
   /* ---------- 커버 ---------- */
   .cover {
-    height: calc(100vw * 1.95);
+    height: 100svh;
     min-height: 520px;
-    max-height: 880px;
     overflow: hidden;
     background-color: #2A2C28;
     color: #FFFFFF;
@@ -84,7 +83,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 50% 22%;
+    object-position: 50% 18%;
     display: block;
     z-index: 0;
   }
@@ -701,6 +700,24 @@
     .scroll-line::after { animation: none; }
   }
 </style>
+<script>
+  (function () {
+    function px() {
+      var h = window.innerHeight || 0;
+      if (!h) return;
+      var s = document.getElementById("cover-h-style") || document.createElement("style");
+      s.id = "cover-h-style";
+      s.textContent = ".cover{height:" + h + "px}";
+      if (!s.parentNode) document.head.appendChild(s);
+    }
+    px();
+    var w0 = window.innerWidth;
+    window.addEventListener("orientationchange", function () { setTimeout(px, 300); });
+    window.addEventListener("resize", function () {
+      if (Math.abs(window.innerWidth - w0) > 40) { w0 = window.innerWidth; px(); }
+    });
+  })();
+</script>
 </head>
 <body>
 
