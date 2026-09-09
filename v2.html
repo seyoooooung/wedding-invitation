@@ -67,8 +67,11 @@
     height: 100svh;
     min-height: 560px;
     max-height: 900px;
-    background: #FFFFFF;
-    color: var(--ink);
+    background-color: #2A2C28;
+    background-image: url("cover.jpg");
+    background-size: cover;
+    background-position: 50% 22%;
+    color: #FFFFFF;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -80,23 +83,23 @@
   .cover::before {
     content: "";
     position: absolute;
-    inset: 14px;
-    border: 1px solid rgba(26, 26, 24, 0.22);
+    inset: 0;
     pointer-events: none;
-    box-shadow:
-      inset 0 1.5px 2px rgba(26, 26, 24, 0.12),
-      0 -1.5px 2px rgba(26, 26, 24, 0.09);
+    background: linear-gradient(to bottom,
+      rgba(20, 22, 19, 0.30) 0%,
+      rgba(20, 22, 19, 0.12) 20%,
+      rgba(20, 22, 19, 0.34) 48%,
+      rgba(20, 22, 19, 0.24) 68%,
+      rgba(20, 22, 19, 0.62) 100%);
   }
   .cover::after {
     content: "";
     position: absolute;
-    inset: 19px;
-    border: 1px solid rgba(26, 26, 24, 0.14);
+    inset: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
     pointer-events: none;
-    box-shadow:
-      inset 0 1px 2px rgba(26, 26, 24, 0.08),
-      0 -1px 2px rgba(26, 26, 24, 0.06);
   }
+  .cover-center, .cover-bottom { position: relative; z-index: 1; }
 
   .cover-date {
     font-family: var(--mono);
@@ -114,7 +117,8 @@
     font-size: 12px;
     letter-spacing: 0.42em;
     text-indent: 0.42em;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.92);
+    text-shadow: 0 1px 10px rgba(20, 22, 19, 0.5);
   }
 
   .cover-names {
@@ -129,11 +133,13 @@
     text-indent: 0.1em;
     line-height: 1.15;
     white-space: nowrap;
+    color: #FFFFFF;
+    text-shadow: 0 1px 12px rgba(20, 22, 19, 0.35);
   }
 
   .cover-names .amp {
     font-size: 0.5em;
-    color: var(--muted);
+    color: rgba(255, 255, 255, 0.8);
     letter-spacing: 0;
     text-indent: 0;
     line-height: 1;
@@ -146,10 +152,11 @@
     font-family: var(--mono);
   }
   .cover-when {
-    font-size: clamp(11px, 3.4vw, 13px);
-    letter-spacing: 0.22em;
-    text-indent: 0.22em;
-    color: var(--ink);
+    font-family: "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    color: #FFFFFF;
+    text-shadow: 0 1px 10px rgba(20, 22, 19, 0.4);
   }
   .cover-time {
     margin-top: 8px;
@@ -159,17 +166,18 @@
     color: var(--ink);
   }
   .cover-where {
-    margin-top: 14px;
-    font-size: clamp(9px, 2.8vw, 11px);
-    letter-spacing: 0.15em;
-    text-indent: 0.15em;
-    color: var(--muted);
+    margin-top: 10px;
+    font-family: "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    color: rgba(255, 255, 255, 0.88);
+    text-shadow: 0 1px 10px rgba(20, 22, 19, 0.4);
   }
 
   .scroll-line {
     width: 1px;
     height: 40px;
-    background: rgba(62, 58, 51, 0.3);
+    background: rgba(255, 255, 255, 0.55);
     position: absolute;
     bottom: 32px;
     left: 50%;
@@ -180,7 +188,7 @@
     position: absolute;
     left: 0; top: -50%;
     width: 100%; height: 50%;
-    background: var(--ink);
+    background: #FFFFFF;
     animation: drop 2.2s ease-in-out infinite;
   }
   @keyframes drop {
@@ -194,13 +202,21 @@
 
   .eyebrow {
     font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.30em;
-    text-indent: 0.30em;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-indent: 0.2em;
     color: var(--cobalt);
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 0;
+  }
+  .eyebrow::after {
+    content: "";
+    display: block;
+    width: 26px;
+    height: 1px;
+    background: rgba(26, 26, 24, 0.35);
+    margin: 18px auto 36px;
   }
 
   .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -210,7 +226,7 @@
   .greeting-body {
     text-align: center;
     font-size: 16px;
-    line-height: 2.15;
+    line-height: 1.95;
     color: #454440;
   }
 
@@ -223,9 +239,9 @@
     font-size: 15px;
   }
   .family-row { display: flex; align-items: baseline; gap: 10px; }
-  .family-row .parents { color: var(--muted); }
+  .family-row .parents { color: var(--muted); letter-spacing: 0.06em; }
   .family-row .relation { font-size: 13px; color: var(--muted); }
-  .family-row .child { font-weight: 600; letter-spacing: 0.04em; }
+  .family-row .child { font-weight: 500; letter-spacing: 0.12em; }
 
   /* ---------- 예식 안내 ---------- */
   .when-where { text-align: center; }
@@ -377,7 +393,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 48px;
+    height: 52px;
     text-decoration: none;
     font-size: 15px;
     font-weight: 600;
@@ -409,9 +425,9 @@
   }
   .dark-eyebrow {
     font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.32em;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.24em;
     text-indent: 0.32em;
     color: #5C665F;
     text-align: center;
@@ -444,7 +460,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 21px 20px;
     font-size: 16px;
     font-weight: 600;
     color: var(--ink);
@@ -514,7 +530,8 @@
     justify-content: space-between;
     gap: 12px;
     width: 100%;
-    padding: 18px 20px;
+    padding: 17px 20px;
+    min-height: 56px;
     background: #FFFFFF;
     border: 1px solid rgba(30, 44, 34, 0.14);
     border-radius: 2px;
@@ -691,9 +708,8 @@
       </h1>
     </div>
     <div class="cover-bottom">
-      <p class="cover-when">NOVEMBER 07, 2026</p>
-      <p class="cover-time">SATURDAY 3:30 PM</p>
-      <p class="cover-where">W SQUARE CONVENTION 8F CHAPEL HALL</p>
+      <p class="cover-when">2026년 11월 7일 토요일 오후 3시 30분</p>
+      <p class="cover-where">W스퀘어컨벤션 8층 채플홀</p>
     </div>
     <div class="scroll-line" aria-hidden="true"></div>
   </header>
