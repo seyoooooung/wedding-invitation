@@ -20,7 +20,7 @@
     --mono: "Courier New", "Courier", monospace;
     --hairline-dark: rgba(30, 44, 34, 0.18);
     --ink: #1A1A18;
-    --muted: #8B8983;
+    --muted: #6E6C67;
     --hairline: #E8E7E3;
     --paper: #FFFFFF;
     --ground: #EFEEEB;
@@ -258,7 +258,7 @@
     padding-bottom: 12px;
     text-align: center;
   }
-  .calendar .dow.sun { color: #B9B7B1; }
+  .calendar .dow.sun { color: #95938D; }
   .calendar .day {
     height: 44px;
     display: flex;
@@ -268,7 +268,7 @@
     color: #514F4A;
     position: relative;
   }
-  .calendar .day.sun { color: #C1BFB9; }
+  .calendar .day.sun { color: #95938D; }
   .calendar .day.dday {
     color: #FFFFFF;
     font-weight: 600;
@@ -384,7 +384,7 @@
     font-size: 11px;
     letter-spacing: 0.32em;
     text-indent: 0.32em;
-    color: #859087;
+    color: #5C665F;
     text-align: center;
     margin-bottom: 16px;
   }
@@ -436,7 +436,7 @@
   }
   .account-row + .account-row { padding-top: 18px; border-top: 1px solid var(--hairline-dark); }
   .account-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-  .account-holder { font-size: 13.5px; color: #77756F; }
+  .account-holder { font-size: 13.5px; color: #5F625C; }
   .account-number { font-size: 16px; color: var(--ink); font-variant-numeric: tabular-nums; }
   .copy-btn {
     flex-shrink: 0;
@@ -520,14 +520,14 @@
     font-size: 11px;
     letter-spacing: 0.3em;
     text-indent: 0.3em;
-    color: #8B8983;
+    color: #5C665F;
     font-variant-numeric: tabular-nums;
   }
   .footer-names {
     font-family: var(--mono);
-    font-size: 13.5px;
-    letter-spacing: 0.22em;
-    text-indent: 0.22em;
+    font-size: clamp(11px, 3.4vw, 13.5px);
+    letter-spacing: 0.18em;
+    text-indent: 0.18em;
     color: var(--ink);
     white-space: nowrap;
   }
