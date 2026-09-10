@@ -620,16 +620,25 @@
   }
   .lightbox:not(.open) { visibility: hidden; }
   .lightbox.open { opacity: 1; pointer-events: auto; visibility: visible; }
+  .lb-stage {
+    position: relative;
+    width: calc(100% - 36px);
+    height: 82vh;
+    height: 82svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .lightbox .lb-img {
-    max-width: calc(100% - 36px);
-    max-height: 82vh;
-    max-height: 82svh;
+    position: absolute;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
     display: block;
     opacity: 0;
-    transition: opacity 0.22s ease;
+    transition: opacity 0.4s ease;
   }
-  .lightbox .lb-img.ready { opacity: 1; }
+  .lightbox .lb-img.on { opacity: 1; }
   .lb-close {
     position: absolute;
     top: 10px; right: 10px;
@@ -645,20 +654,24 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 48px; height: 72px;
+    width: 56px; height: 88px;
     background: none; border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    outline: none;
   }
+  .lb-close { outline: none; }
   .lb-close:active, .lb-nav:active { opacity: 0.5; }
   .lb-nav.prev { left: 0; }
   .lb-nav.next { right: 0; }
   .lb-nav .chev {
-    width: 12px; height: 12px;
-    border-right: 2px solid rgba(255,255,255,0.8);
-    border-bottom: 2px solid rgba(255,255,255,0.8);
+    width: 17px; height: 17px;
+    border-right: 2.5px solid #FFFFFF;
+    border-bottom: 2.5px solid #FFFFFF;
+    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5));
+    transition: opacity 0.15s ease;
   }
   .lb-nav.prev .chev { transform: rotate(135deg); }
   .lb-nav.next .chev { transform: rotate(-45deg); }
@@ -714,7 +727,11 @@
     outline: 2px solid var(--cobalt);
     outline-offset: 2px;
   }
-  .lightbox button:focus-visible { outline-color: #FFFFFF; }
+  .lightbox button:focus-visible { outline: none; }
+  .lb-nav:focus-visible .chev { opacity: 1; transform-origin: center; }
+  .lb-nav.prev:focus-visible .chev { transform: rotate(135deg) scale(1.25); }
+  .lb-nav.next:focus-visible .chev { transform: rotate(-45deg) scale(1.25); }
+  .lb-close:focus-visible { opacity: 1; transform: scale(1.15); }
 
   .sr-only {
     position: absolute;
@@ -1007,8 +1024,11 @@
 
 </div>
 
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="사진 크게 보기" aria-hidden="true">
-  <img class="lb-img" id="lb-img" alt="웨딩 사진 크게 보기">
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="사진 크게 보기" aria-hidden="true" tabindex="-1">
+  <div class="lb-stage">
+    <img class="lb-img" id="lb-img" alt="웨딩 사진 크게 보기">
+    <img class="lb-img" id="lb-img2" alt="" aria-hidden="true">
+  </div>
   <button class="lb-close" type="button" id="lb-close" aria-label="닫기">&times;</button>
   <button class="lb-nav prev" type="button" id="lb-prev" aria-label="이전 사진"><span class="chev" aria-hidden="true"></span></button>
   <button class="lb-nav next" type="button" id="lb-next" aria-label="다음 사진"><span class="chev" aria-hidden="true"></span></button>
@@ -1163,57 +1183,59 @@
   var lbCount = document.getElementById("lb-count");
   var lbIndex = 0;
 
-  var lbList = lbImgs;
+  var lbList = lbImgs;              // 접힘 여부와 무관하게 항상 전체
   var lbReturnTo = null;
   var hiT;
-
-  function visibleImgs() {
-    return lbImgs.filter(function (el) { return el.offsetParent !== null; });
-  }
+  var lbLayers = [lbImg, document.getElementById("lb-img2")];
+  var lbActive = 0;
 
   function lbShow(i, immediate) {
     lbIndex = (i + lbList.length) % lbList.length;
     var el = lbList[lbIndex];
     var full = el.getAttribute("data-full") || el.currentSrc || el.src;
     var thumb = el.currentSrc || el.src;
-    lbImg.alt = el.getAttribute("aria-label") || "웨딩 사진 크게 보기";
     lbCount.textContent = (lbIndex + 1) + " / " + lbList.length;
     clearTimeout(hiT);
-    lbImg.classList.remove("ready");
     var want = lbIndex;
+
+    function swap(src) {
+      if (want !== lbIndex) return;
+      var cur = lbLayers[lbActive];
+      var nxt = lbLayers[1 - lbActive];
+      nxt.src = src;
+      nxt.alt = el.getAttribute("aria-label") || "웨딩 사진 크게 보기";
+      nxt.removeAttribute("aria-hidden");
+      cur.setAttribute("aria-hidden", "true");
+      cur.alt = "";
+      nxt.classList.add("on");
+      cur.classList.remove("on");
+      lbActive = 1 - lbActive;
+    }
     function load() {
       var hi = new Image();
-      hi.onload = function () {
-        if (want !== lbIndex) return;
-        lbImg.src = full;
-        lbImg.classList.add("ready");
-      };
-      hi.onerror = function () {
-        if (want !== lbIndex) return;
-        lbImg.src = thumb;
-        lbImg.classList.add("ready");
-      };
+      hi.onload = function () { swap(full); };
+      hi.onerror = function () { swap(thumb); };
       hi.src = full;
     }
     if (immediate) load();
-    else hiT = setTimeout(load, 220);
+    else hiT = setTimeout(load, 120);
   }
   function lbOpen(el) {
-    lbList = visibleImgs();
-    var i = lbList.indexOf(el);
+    var i = lbImgs.indexOf(el);
     lbReturnTo = el;
     lbShow(i < 0 ? 0 : i, true);
     lb.classList.add("open");
     lb.setAttribute("aria-hidden", "false");
     var sw = document.querySelector(".scroll-wrap");
     if (sw) sw.style.overflow = "hidden";
-    document.getElementById("lb-close").focus();
+    lb.focus();
   }
   function lbClose() {
     lb.classList.remove("open");
     lb.setAttribute("aria-hidden", "true");
     clearTimeout(hiT);
-    lbImg.classList.remove("ready");
+    lbLayers[0].classList.remove("on");
+    lbLayers[1].classList.remove("on");
     var sw2 = document.querySelector(".scroll-wrap");
     if (sw2) sw2.style.overflow = "";
     if (lbReturnTo && lbReturnTo.offsetParent !== null) lbReturnTo.focus();
